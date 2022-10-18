@@ -52,7 +52,7 @@ describe('walk', () => {
     const nodeWithSubtree = { type: 'combinator', subtree: {} } as unknown as Token;
     const options = {} as unknown as WalkOptions;
 
-    walk(nodeWithSubtree, callbackSpy, thirdParam);
+    walk(nodeWithSubtree, callbackSpy, options);
 
     expect(callbackSpy).toHaveBeenCalledTimes(2);
     expect(callbackSpy).toHaveBeenCalledWith(nodeWithSubtree.subtree, nodeWithSubtree);

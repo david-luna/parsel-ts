@@ -50,7 +50,7 @@ describe('walk', () => {
 
   it('should walk recusively on a subtree of if subtree option is set to true', () => {
     const nodeWithSubtree = { type: 'combinator', subtree: {} } as unknown as Token;
-    const options = {} as unknown as WalkOptions;
+    const options = { subtree: true } as WalkOptions;
 
     walk(nodeWithSubtree, callbackSpy, options);
 

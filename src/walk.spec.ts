@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { AST, Complex, List, Token } from './types';
-import { walk } from './walk';
+import { walk, WalkOptions } from './walk';
 
 describe('walk', () => {
   const callbackSpy = jest.fn();
@@ -48,9 +48,9 @@ describe('walk', () => {
     expect(callbackSpy).toHaveBeenCalledWith(compoundNode, void 0);
   });
 
-  it('should walk recusively on a subtree of if 3rd param defined and with subtree', () => {
+  it('should walk recusively on a subtree of if subtree option is set to true', () => {
     const nodeWithSubtree = { type: 'combinator', subtree: {} } as unknown as Token;
-    const thirdParam = { subtree: {} } as unknown as Token;
+    const options = {} as unknown as WalkOptions;
 
     walk(nodeWithSubtree, callbackSpy, thirdParam);
 
@@ -59,7 +59,7 @@ describe('walk', () => {
     expect(callbackSpy).toHaveBeenCalledWith(nodeWithSubtree, void 0);
   });
 
-  it('should NOT walk recusively on a subtree of if 3rd param is not defined', () => {
+  it('should NOT walk recusively on a subtree of if options is not defined', () => {
     const nodeWithSubtree = { type: 'combinator', subtree: {} } as unknown as Token;
 
     walk(nodeWithSubtree, callbackSpy);
@@ -68,11 +68,11 @@ describe('walk', () => {
     expect(callbackSpy).toHaveBeenCalledWith(nodeWithSubtree, void 0);
   });
 
-  it('should NOT walk recusively on a subtree of if 3rd param does not have subtree', () => {
+  it('should NOT walk recusively on a subtree of if subtree option set to false', () => {
     const nodeWithSubtree = { type: 'combinator', subtree: {} } as unknown as Token;
-    const thirdParam = {} as unknown as Token;
+    const options = {} as unknown as WalkOptions;
 
-    walk(nodeWithSubtree, callbackSpy, thirdParam);
+    walk(nodeWithSubtree, callbackSpy, options);
 
     expect(callbackSpy).toHaveBeenCalledTimes(1);
     expect(callbackSpy).toHaveBeenCalledWith(nodeWithSubtree, void 0);

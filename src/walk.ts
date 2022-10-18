@@ -1,7 +1,13 @@
 import { AST, Token } from './types';
 
+export interface WalkOptions {
+  subtree: boolean;
+}
+
+export type WalkCallback = (n: AST, p?: AST) => void;
+
 // Traverse an AST (or part thereof), in depth-first order
-export function walk(node: AST | void, callback: (n: AST, p?: AST) => void, o?: Token, parent?: AST): void {
+export function walk(node: AST | void, callback: WalkCallback, o?: WalkOptions, parent?: AST): void {
   if (!node) {
     return;
   }

@@ -21,7 +21,6 @@ function restoreNested(tokens: Array<string | Token>, strings: StringWithOffset[
           // Re-evaluate groups
           const groupsRegexp = TOKENS_FOR_RESTORE[token.type];
           groupsRegexp.lastIndex = 0;
-          console.log(groupsRegexp.source)
           const match = groupsRegexp.exec(token.content);
           const groups = match && match.groups;
           Object.assign(token, groups);

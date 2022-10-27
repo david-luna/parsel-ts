@@ -32,10 +32,12 @@ export const RECURSIVE_PSEUDO_CLASSES_ARGS: Record<string, RegExp> = {
   'nth-last-child': childRegexp,
 };
 
-const replacePseudo = (re: RegExp): RegExp => RegExp(re.source.replace('(?<argument>¶+)', '(?<argument>.+?)'), 'gu');
-
-export const TOKENS_FOR_RESTORE = {
-  ...TOKENS,
-  'pseudo-element': replacePseudo(TOKENS['pseudo-element']),
-  'pseudo-class': replacePseudo(TOKENS['pseudo-class']),
-};
+export const TOKENS_FOR_RESTORE = Object.assign({}, TOKENS);
+TOKENS_FOR_RESTORE['pseudo-element'] = RegExp(
+  TOKENS['pseudo-element'].source.replace('(?<argument>¶+)', '(?<argument>.+?)'),
+  'gu',
+);
+TOKENS_FOR_RESTORE['pseudo-class'] = RegExp(
+  TOKENS['pseudo-class'].source.replace('(?<argument>¶+)', '(?<argument>.+)'),
+  'gu',
+);

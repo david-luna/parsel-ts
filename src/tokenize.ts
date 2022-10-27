@@ -19,8 +19,10 @@ function restoreNested(tokens: Array<string | Token>, strings: StringWithOffset[
         // actually changed?
         if (token.content !== content) {
           // Re-evaluate groups
-          TOKENS_FOR_RESTORE[token.type].lastIndex = 0;
-          const match = TOKENS_FOR_RESTORE[token.type].exec(token.content);
+          const groupsRegexp = TOKENS_FOR_RESTORE[token.type];
+          groupsRegexp.lastIndex = 0;
+          console.log(groupsRegexp.source)
+          const match = groupsRegexp.exec(token.content);
           const groups = match && match.groups;
           Object.assign(token, groups);
         }

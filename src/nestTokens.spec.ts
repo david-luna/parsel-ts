@@ -1,4 +1,4 @@
-import { nestTokens, NestTokensOptions } from './nestTokens';
+import { nestTokens } from './nestTokens';
 import { Token } from './types';
 
 describe('nestTokens', () => {

@@ -1,4 +1,4 @@
-import { AST, Token } from './types';
+import { AST } from './types';
 
 export interface WalkOptions {
   subtree: boolean;

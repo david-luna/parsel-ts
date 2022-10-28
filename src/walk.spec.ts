@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-import { AST, Complex, List, Token } from './types';
+import { Complex, List, Token } from './types';
 import { walk, WalkOptions } from './walk';
 
 describe('walk', () => {

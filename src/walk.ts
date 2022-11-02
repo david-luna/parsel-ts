@@ -19,7 +19,7 @@ export function walk(node: AST | void, callback: WalkCallback, o?: WalkOptions, 
     for (const n of node.list) {
       walk(n, callback, o, node);
     }
-  } else if (node.subtree && o && o.subtree) { // TODO: looking at the usage this seems not reachable
+  } else if (node.subtree && o && o.subtree) {
     walk(node.subtree, callback, o, node);
   }
 

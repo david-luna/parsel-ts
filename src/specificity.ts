@@ -29,6 +29,7 @@ export function specificityToNumber(specificityArr: number[], base?: number): nu
   return specificityArr[0] * b ** 2 + specificityArr[1] * b + specificityArr[2];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function specificity(selector: string | AST, { format = 'array' } = {}): number[] | null {
   const ast = typeof selector === 'object' ? selector : parse(selector, { recursive: true });
 

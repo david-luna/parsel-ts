@@ -15,7 +15,7 @@ You can find the original project [here](https://github.com/LeaVerou/parsel)
 
 Reason to do it is to learn more about CSS and its grammar but also to provide typings to another project I'm woring on and add some tweaks and fixes.
 
-The idea is to remain consistent with the current API which you can read in the [offical website](https://projects.verou.me/parsel).
+The idea is to remain consistent with the current API which you can read in the [official website](https://projects.verou.me/parsel).
 
 ## Release notes
 

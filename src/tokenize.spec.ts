@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { tokenize } from './tokenize';
 
-const removeVoids = (obj: any) => JSON.parse(JSON.stringify(obj));
+const removeVoids = (obj: unknown) => JSON.parse(JSON.stringify(obj));
 
 describe('tokenize', () => {
   it('should return null if there is no input', () => {

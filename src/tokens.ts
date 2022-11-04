@@ -1,7 +1,7 @@
 export const TOKENS = {
   attribute:
     // eslint-disable-next-line max-len
-    /\[\s*(?:(?<namespace>\*|[-\w]*)\|)?(?<name>[-\w\u{0080}-\u{FFFF}]+)\s*(?:(?<operator>\W?=)\s*(?<value>.+?)\s*(?<caseSensitive>[iIsS])?\s*)?\]/gu,
+    /\[\s*(?:(?<namespace>\*|[-\w]*)\|)?(?<name>[-\w\u{0080}-\u{FFFF}]+)\s*(?:(?<operator>\W?=)\s*(?<value>.+?)\s*(\s(?<caseSensitive>[iIsS]))?\s*)?\]/gu,
   id: /#(?<name>(?:[-\w\u{0080}-\u{FFFF}]|\\.)+)/gu,
   class: /\.(?<name>(?:[-\w\u{0080}-\u{FFFF}]|\\.)+)/gu,
   comma: /\s*,\s*/g, // must be before combinator

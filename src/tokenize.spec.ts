@@ -149,7 +149,6 @@ describe('tokenize', () => {
     ]);
   });
 
-  //a[attr="abcde"][attr="123"]
   it('should tokenize multiple attribute selector', () => {
     expect(removeVoids(tokenize('a[attribute="value"][attribute="123"]'))).toEqual([
       {
@@ -173,6 +172,27 @@ describe('tokenize', () => {
         value: '"123"',
         content: '[attribute="123"]',
         pos: [20, 37],
+      },
+    ]);
+  });
+
+  it('should tokenize without taking the last leter as caseSensitive modifier', () => {
+    expect(removeVoids(tokenize('[foo=ss][bar=ii]'))).toEqual([
+      {
+        type: 'attribute',
+        name: 'foo',
+        operator: '=',
+        value: 'ss',
+        content: '[foo=ss]',
+        pos: [0, 8],
+      },
+      {
+        type: 'attribute',
+        name: 'bar',
+        operator: '=',
+        value: 'ii',
+        content: '[bar=ii]',
+        pos: [8, 16],
       },
     ]);
   });

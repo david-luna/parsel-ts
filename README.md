@@ -19,6 +19,10 @@ The idea is to remain consistent with the current API which you can read in the 
 
 ## Release notes
 
+### [1.0.1]
+
+* Fix for backslashes. See [this issue](https://github.com/LeaVerou/parsel/issues/26)
+
 ### [1.0.0]
 
 * 1st version with parse, tokenize, specificity, specificityToNumber and walk APIs

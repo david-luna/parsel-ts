@@ -105,12 +105,18 @@ export function tokenize(input: string): Array<Token | string> | null {
   let selector = input.trim(); // prevent leading/trailing whitespace be interpreted as combinators
 
   // Replace strings with whitespace strings (to preserve offsets)
+  // https://github.com/LeaVerou/parsel/pull/16
   const strings: StringWithOffset[] = [];
-  // FIXME Does not account for escaped backslashes before a quote
-  selector = selector.replace(/(['"])(\\\1|.)+?\1/g, (str, quote, content, start) => {
-    strings.push({ str, start });
-    return quote + '§'.repeat(content.length) + quote;
-  });
+  selector = selector.replace(
+    /(?:"((?:[^"\\]|\\.)*)")|(?:'((?:[^'\\]|\\.)*)')/g,
+    (str, contentDouble, contentSingle, start) => {
+      strings.push({ str, start });
+      const content = contentDouble === void 0 ? contentSingle : contentDouble;
+      // eslint-disable-next-line prettier/prettier
+      const quote = (contentDouble === void 0) ? '\'' : '"';
+      return quote + '§'.repeat(content.length) + quote;
+    },
+  );
 
   // Now that strings are out of the way, extract parens and replace them with parens with whitespace (to preserve offsets)
   const parens: StringWithOffset[] = [];

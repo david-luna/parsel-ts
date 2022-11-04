@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { tokenize } from './tokenize';
 
+const removeVoids = (obj: any) => JSON.parse(JSON.stringify(obj));
+
 describe('tokenize', () => {
   it('should return null if there is no input', () => {
     expect(tokenize('')).toEqual(null);
@@ -41,21 +43,20 @@ describe('tokenize', () => {
   });
 
   it('should tokenize an attribute equals selector', () => {
-    expect(tokenize('[attribute="value"]')).toEqual([
+    expect(removeVoids(tokenize('[attribute="value"]'))).toEqual([
       {
         type: 'attribute',
         name: 'attribute',
-        namespace: void 0,
         operator: '=',
         value: '"value"',
         content: '[attribute="value"]',
-        pos: [0, 15],
+        pos: [0, 19],
       },
     ]);
   });
 
   it('should tokenize an attribute starts with selector', () => {
-    expect(tokenize('[attribute^="value"]')).toEqual([
+    expect(removeVoids(tokenize('[attribute^="value"]'))).toEqual([
       {
         type: 'attribute',
         name: 'attribute',
@@ -63,104 +64,121 @@ describe('tokenize', () => {
         operator: '^=',
         value: '"value"',
         content: '[attribute^="value"]',
-        caseSensitive: void 0,
-        pos: [0, 16],
+        pos: [0, 20],
       },
     ]);
   });
 
   it('should tokenize an attribute ends with selector', () => {
-    expect(tokenize('[attribute$="value"]')).toEqual([
+    expect(removeVoids(tokenize('[attribute$="value"]'))).toEqual([
       {
         type: 'attribute',
         name: 'attribute',
-        namespace: void 0,
         operator: '$=',
         value: '"value"',
         content: '[attribute$="value"]',
-        caseSensitive: void 0,
-        pos: [0, 16],
+        pos: [0, 20],
       },
     ]);
   });
 
   it('should tokenize an attribute contains occurence selector', () => {
-    expect(tokenize('[attribute*="value"]')).toEqual([
+    expect(removeVoids(tokenize('[attribute*="value"]'))).toEqual([
       {
         type: 'attribute',
         name: 'attribute',
-        namespace: void 0,
         operator: '*=',
         value: '"value"',
         content: '[attribute*="value"]',
-        caseSensitive: void 0,
-        pos: [0, 16],
+        pos: [0, 20],
       },
     ]);
   });
 
   it('should tokenize an attribute contains with whitespaces selector', () => {
-    expect(tokenize('[attribute~="value"]')).toEqual([
+    expect(removeVoids(tokenize('[attribute~="value"]'))).toEqual([
       {
         type: 'attribute',
         name: 'attribute',
-        namespace: void 0,
         operator: '~=',
         value: '"value"',
         content: '[attribute~="value"]',
-        caseSensitive: void 0,
-        pos: [0, 16],
+        pos: [0, 20],
       },
     ]);
   });
 
   it('should tokenize an attribute starts with hypen selector', () => {
-    expect(tokenize('[attribute|="value"]')).toEqual([
+    expect(removeVoids(tokenize('[attribute|="value"]'))).toEqual([
       {
         type: 'attribute',
         name: 'attribute',
-        namespace: void 0,
         operator: '|=',
         value: '"value"',
         content: '[attribute|="value"]',
-        caseSensitive: void 0,
-        pos: [0, 16],
+        pos: [0, 20],
       },
     ]);
   });
 
   it('should tokenize setting the caseSensitive property to insensitive', () => {
-    expect(tokenize('[attribute|="value" i]')).toEqual([
+    expect(removeVoids(tokenize('[attribute|="value" i]'))).toEqual([
       {
         type: 'attribute',
         name: 'attribute',
-        namespace: void 0,
         operator: '|=',
         value: '"value"',
         content: '[attribute|="value" i]',
         caseSensitive: 'i',
-        pos: [0, 18],
+        pos: [0, 22],
       },
     ]);
   });
 
   it('should tokenize setting the caseSensitive property to sensitive', () => {
-    expect(tokenize('[attribute|="value" s]')).toEqual([
+    expect(removeVoids(tokenize('[attribute|="value" s]'))).toEqual([
       {
         type: 'attribute',
         name: 'attribute',
-        namespace: void 0,
         operator: '|=',
         value: '"value"',
         content: '[attribute|="value" s]',
         caseSensitive: 's',
-        pos: [0, 18],
+        pos: [0, 22],
+      },
+    ]);
+  });
+
+  //a[attr="abcde"][attr="123"]
+  it('should tokenize multiple attribute selector', () => {
+    expect(removeVoids(tokenize('a[attribute="value"][attribute="123"]'))).toEqual([
+      {
+        type: 'type',
+        name: 'a',
+        content: 'a',
+        pos: [0, 1],
+      },
+      {
+        type: 'attribute',
+        name: 'attribute',
+        operator: '=',
+        value: '"value"',
+        content: '[attribute="value"]',
+        pos: [1, 20],
+      },
+      {
+        type: 'attribute',
+        name: 'attribute',
+        operator: '=',
+        value: '"123"',
+        content: '[attribute="123"]',
+        pos: [20, 37],
       },
     ]);
   });
 
   it('should tokenize pseudo-elements', () => {
-    expect(tokenize('::before')).toEqual([
+    expect(removeVoids(tokenize('::before'))).toEqual([
       {
         type: 'pseudo-element',
         argument: void 0,
@@ -172,10 +190,9 @@ describe('tokenize', () => {
   });
 
   it('should tokenize pseudo-classes', () => {
-    expect(tokenize(':hover')).toEqual([
+    expect(removeVoids(tokenize(':hover'))).toEqual([
       {
         type: 'pseudo-class',
-        argument: void 0,
         name: 'hover',
         content: ':hover',
         pos: [0, 6],
@@ -184,7 +201,7 @@ describe('tokenize', () => {
   });
 
   it('should tokenize pseudo-classes nesting', () => {
-    expect(tokenize('div:not(:where(#yolo))')).toEqual([
+    expect(removeVoids(tokenize('div:not(:where(#yolo))'))).toEqual([
       {
         type: 'type',
         content: 'div',
@@ -205,7 +222,7 @@ describe('tokenize', () => {
     // eslint-disable-next-line prettier/prettier
     const tokens = tokenize('#foo > .bar + div.k1.k2 [id=\'baz\']:hello(2):not(:where(#yolo))::before');
 
-    expect(JSON.parse(JSON.stringify(tokens))).toEqual([
+    expect(removeVoids(tokens)).toEqual([
       {
         type: 'id',
         content: '#foo',
@@ -259,27 +276,27 @@ describe('tokenize', () => {
         operator: '=',
         // eslint-disable-next-line prettier/prettier
         value: '\'baz\'',
-        pos: [24, 32],
+        pos: [24, 34],
       },
       {
         type: 'pseudo-class',
         content: ':hello(2)',
         name: 'hello',
         argument: '2',
-        pos: [32, 41],
+        pos: [34, 43],
       },
       {
         type: 'pseudo-class',
         content: ':not(:where(#yolo))',
         name: 'not',
         argument: ':where(#yolo)',
-        pos: [41, 60],
+        pos: [43, 62],
       },
       {
         type: 'pseudo-element',
         content: '::before',
         name: 'before',
-        pos: [60, 68],
+        pos: [62, 70],
       },
     ]);
   });

@@ -62,21 +62,21 @@ describe('parse', () => {
             operator: '=',
             // eslint-disable-next-line prettier/prettier
             value: '\'baz\'',
-            pos: [24, 32],
+            pos: [24, 34],
           },
           {
             type: 'pseudo-class',
             content: ':hello(2)',
             name: 'hello',
             argument: '2',
-            pos: [32, 41],
+            pos: [34, 43],
           },
           {
             type: 'pseudo-class',
             content: ':not(:where(#yolo))',
             name: 'not',
             argument: ':where(#yolo)',
-            pos: [41, 60],
+            pos: [43, 62],
             subtree: {
               type: 'pseudo-class',
               content: ':where(#yolo)',
@@ -95,7 +95,7 @@ describe('parse', () => {
             type: 'pseudo-element',
             content: '::before',
             name: 'before',
-            pos: [60, 68],
+            pos: [62, 70],
           },
         ],
       },

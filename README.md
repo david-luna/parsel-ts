@@ -19,6 +19,10 @@ The idea is to remain consistent with the current API which you can read in the 
 
 ## Release notes
 
+### [1.0.2]
+
+* Fix for attribute values trimmed if ending with i/s (case sensitive flags). See [this issue](https://github.com/LeaVerou/parsel/issues/17)
+
 ### [1.0.1]
 
 * Fix for backslashes. See [this issue](https://github.com/LeaVerou/parsel/issues/26)

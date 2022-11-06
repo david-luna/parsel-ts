@@ -1,10 +1,10 @@
 {
   "name": "parsel-ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Port of Parsel-js to TypeScript",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
-  "types": "./lib/index.d.ts",
+  "types": "./lib/esm/index.d.ts",
   "files": [
     "lib"
   ],

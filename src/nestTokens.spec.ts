@@ -4,9 +4,9 @@ import { Token } from './types';
 describe('nestTokens', () => {
   const tokensRecord: Record<string, Token> = {
     id: { type: 'id', content: '#test', name: 'test', pos: [0, 1] },
-    comma: { type: 'comma', content: ',', name: ',', pos: [0, 1] },
+    comma: { type: 'comma', content: ',', pos: [0, 1] },
     clazz: { type: 'class', content: '.class', name: 'class', pos: [0, 1] },
-    combinator: { type: 'combinator', content: '>', name: '>', pos: [0, 1] },
+    combinator: { type: 'combinator', content: '>', pos: [0, 1] },
   };
 
   it('should return null if tokens is empty', () => {

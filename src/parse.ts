@@ -20,8 +20,6 @@ const DEFAULT_PARSE_OPTIONS: ParseOptions = {
  * @param options.recursive {Boolean} Whether to parse the arguments of pseudo-classes like :is(), :has() etc. Defaults to true.
  * @param options.list {Boolean} Whether this can be a selector list (A, B, C etc). Defaults to true.
  */
-// export function parse(selector: string, options: ParseOptions = DEFAULT_PARSE_OPTIONS): AST | null {
-//   const { recursive, list } = options;
 export function parse(selector: string, options: Partial<ParseOptions> = {}): AST | null {
   const { recursive, list } = Object.assign({}, DEFAULT_PARSE_OPTIONS, options);
   const tokens = tokenize(selector);

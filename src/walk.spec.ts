@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-import { Complex, List, Token } from './types';
+import { Complex, List } from './types';
 import { walk, WalkOptions } from './walk';
 
 describe('walk', () => {
@@ -49,7 +49,8 @@ describe('walk', () => {
   });
 
   it('should walk recusively on a subtree of if subtree option is set to true', () => {
-    const nodeWithSubtree = { type: 'combinator', subtree: {} } as unknown as Token;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const nodeWithSubtree = { type: 'pseudo-class', subtree: {} } as any;
     const options = { subtree: true } as WalkOptions;
 
     walk(nodeWithSubtree, callbackSpy, options);
@@ -60,7 +61,8 @@ describe('walk', () => {
   });
 
   it('should NOT walk recusively on a subtree of if options is not defined', () => {
-    const nodeWithSubtree = { type: 'combinator', subtree: {} } as unknown as Token;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const nodeWithSubtree = { type: 'pseudo-class', subtree: {} } as any;
 
     walk(nodeWithSubtree, callbackSpy);
 
@@ -69,7 +71,8 @@ describe('walk', () => {
   });
 
   it('should NOT walk recusively on a subtree of if subtree option set to false', () => {
-    const nodeWithSubtree = { type: 'combinator', subtree: {} } as unknown as Token;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const nodeWithSubtree = { type: 'pseudo-class', subtree: {} } as any;
     const options = {} as unknown as WalkOptions;
 
     walk(nodeWithSubtree, callbackSpy, options);

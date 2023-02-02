@@ -1,3 +1,4 @@
+// Tokenize types
 interface GenericToken {
   content: string;
   pos: [number, number];
@@ -23,7 +24,7 @@ interface AttributeToken extends GenericToken {
   name: string;
   operator: string;
   value: string;
-  caseSensitive?: 'i'; 
+  caseSensitive?: 'i';
 }
 
 interface PseudoClassToken extends GenericToken {
@@ -47,33 +48,17 @@ interface CombinatorToken extends GenericToken {
   type: 'combinator';
 }
 
+export type Token =
+  | IdToken
+  | TypeToken
+  | ClassToken
+  | AttributeToken
+  | PseudoClassToken
+  | PseudoElementToken
+  | CommaToken
+  | CombinatorToken;
 
-export type Token = 
-  IdToken |
-  TypeToken |
-  ClassToken |
-  AttributeToken |
-  PseudoClassToken |
-  PseudoElementToken |
-  CommaToken |
-  CombinatorToken;
-
-
-/*
-export interface TokenOld {
-  type: 'class' | 'attribute' | 'id' | 'type' | 'pseudo-element' | 'pseudo-class' | 'comma' | 'combinator';
-  content: string;
-  name: string;
-  namespace?: string;
-  value?: string;
-  pos: [number, number];
-  operator?: string;
-  argument?: string;
-  subtree?: AST;
-  caseSensitive?: 'i';
-}
-*/
-
+// AST types
 export interface Complex {
   type: 'complex';
   combinator: string;

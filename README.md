@@ -19,6 +19,10 @@ The idea is to remain consistent with the current API which you can read in the 
 
 ## Release notes
 
+### [1.0.4]
+
+* Improved token types and export them.
+
 ### [1.0.3]
 
 * Fix bad reference to TypeScript definition files.

@@ -10,9 +10,8 @@ interface IdToken extends GenericToken {
   name: string;
 }
 
-interface IdToken extends GenericToken {
-  type: 'id';
-  name: string;
+interface UniversalToken extends GenericToken {
+  type: 'universal';
 }
 
 interface TypeToken extends GenericToken {
@@ -56,6 +55,7 @@ interface CombinatorToken extends GenericToken {
 
 export type Token =
   | IdToken
+  | UniversalToken
   | TypeToken
   | ClassToken
   | AttributeToken

@@ -19,6 +19,10 @@ The idea is to remain consistent with the current API which you can read in the 
 
 ## Release notes
 
+### [1.0.6]
+
+* Fix types for universal selector token.
+
 ### [1.0.5]
 
 * Fix for universal selector. See original issues [42](https://github.com/LeaVerou/parsel/issues/42) [43](https://github.com/LeaVerou/parsel/issues/43) & [44](https://github.com/LeaVerou/parsel/issues/44)

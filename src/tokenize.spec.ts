@@ -238,6 +238,29 @@ describe('tokenize', () => {
     ]);
   });
 
+  it('should tokenize universal selector with namespace', () => {
+    expect(removeVoids(tokenize('html|*'))).toEqual([
+      {
+        type: 'universal',
+        content: 'html|*',
+        namespace: 'html',
+        pos: [0, 6],
+      },
+    ]);
+  });
+
+  it('should tokenize selector with namespace', () => {
+    expect(removeVoids(tokenize('html|p'))).toEqual([
+      {
+        type: 'type',
+        content: 'html|p',
+        namespace: 'html',
+        name: 'p',
+        pos: [0, 6],
+      },
+    ]);
+  });
+
   it('should tokenize the sample from the web', () => {
     // eslint-disable-next-line prettier/prettier
     const tokens = tokenize('#foo > .bar + div.k1.k2 [id=\'baz\']:hello(2):not(:where(#yolo))::before');

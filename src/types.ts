@@ -1,7 +1,13 @@
 // Tokenize types
 interface GenericToken {
   content: string;
+  namespace?: string;
   pos: [number, number];
+}
+
+interface IdToken extends GenericToken {
+  type: 'id';
+  name: string;
 }
 
 interface IdToken extends GenericToken {
@@ -24,7 +30,7 @@ interface AttributeToken extends GenericToken {
   name: string;
   operator: string;
   value: string;
-  caseSensitive?: 'i';
+  caseSensitive?: 'i' | 's';
 }
 
 interface PseudoClassToken extends GenericToken {

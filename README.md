@@ -19,6 +19,10 @@ The idea is to remain consistent with the current API which you can read in the 
 
 ## Release notes
 
+### [1.0.7]
+
+* Fix tokenization of pseudo-elements with arugments. See original issue [48](https://github.com/LeaVerou/parsel/issues/48)
+
 ### [1.0.6]
 
 * Fix types for universal selector token.

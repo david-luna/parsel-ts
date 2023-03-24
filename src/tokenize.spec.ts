@@ -198,6 +198,19 @@ describe('tokenize', () => {
   });
 
   it('should tokenize pseudo-elements', () => {
+    expect(removeVoids(tokenize('::test(a()f)'))).toEqual([
+      {
+        type: 'pseudo-element',
+        argument: 'a()f',
+        name: 'test',
+        content: '::test(a()f)',
+        pos: [0, 12],
+      },
+    ]);
+  });
+
+  // https://github.com/LeaVerou/parsel/issues/48
+  it('should tokenize pseudo-elements with parens', () => {
     expect(removeVoids(tokenize('::before'))).toEqual([
       {
         type: 'pseudo-element',
